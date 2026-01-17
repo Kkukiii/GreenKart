@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>About | GreenKart</title>
+
+  <!-- ✅ Step 2a: add CSS + Ionicons here -->
+  <link rel="stylesheet" href="./assets/css/style.css">
+  <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
+  <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
+</head>
+<body>
+
+  <!-- ✅ Step 2b: add the HEADER here -->
+  <header class="header">
+    <div class="container">
+      <a href="index.html" class="logo">Green<span>Kart</span></a>
+
+      <nav class="navbar" data-navbar>
+        <button class="nav-close-btn" data-nav-close-btn>
+          <ion-icon name="close-outline"></ion-icon>
+        </button>
+
+        <ul class="navbar-list">
+          <li><a href="index.html" class="navbar-link">Home</a></li>
+          <li><a href="about.html" class="navbar-link">About</a></li>
+          <li><a href="shop.html" class="navbar-link">Shop</a></li>
+          <li><a href="blog.html" class="navbar-link">Blog</a></li>
+          <li><a href="product-details.html" class="navbar-link">Products</a></li>
+          <li><a href="contact.html" class="navbar-link">Contact</a></li>
+        </ul>
+      </nav>
+
+      <div class="header-actions">
+        <button data-search-btn class="header-action-btn" aria-label="Open Search">
+          <ion-icon name="search-outline"></ion-icon>
+        </button>
+
+        <button data-panel-btn="whishlist" class="header-action-btn" aria-label="Open Wishlist">
+          <ion-icon name="heart-outline"></ion-icon>
+        </button>
+
+        <button data-panel-btn="cart" class="header-action-btn" aria-label="Open Cart">
+          <ion-icon name="cart-outline"></ion-icon>
+        </button>
+
+        <button class="nav-open-btn" data-nav-open-btn aria-label="Open Menu">
+          <ion-icon name="menu-outline"></ion-icon>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- ✅ Step 2c: page-specific content goes below -->
+  <main class="main-content">
+    <h1>About GreenKart</h1>
+    <p>This is the About page. You can describe your store or mission here.</p>
+  </main>
+
+  <!-- ✅ Step 2d: add JS at the very bottom -->
+  <script src="./assets/js/script.js"></script>
+
+</body>
+</html>

@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Cart - GreenKart</title>
+  <link rel="stylesheet" href="./assets/css/main.css">
+  <style>
+    body {
+      font-family: 'Roboto', sans-serif;
+      background: #f8f9fa;
+      color: #0a1a2a;
+      padding: 20px;
+      margin: 0;
+    }
+    
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 20px;
+    }
+    
+    h2 {
+      color: #2e7d32;
+      text-align: center;
+      margin-bottom: 30px;
+      font-size: 2rem;
+    }
+    
+    .cart-container {
+      background: #fff;
+      border-radius: 10px;
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+      padding: 20px;
+      margin-bottom: 30px;
+    }
+    
+    .cart-item {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 15px 0;
+      border-bottom: 1px solid #eee;
+    }
+    
+    .item-info {
+      display: flex;
+      align-items: center;
+      flex: 1;
+    }
+    
+    .cart-item img {
+      width: 80px;
+      height: 80px;
+      border-radius: 10px;
+      margin-right: 20px;
+      object-fit: cover;
+    }
+    
+    .item-details h4 {
+      margin: 0 0 5px 0;
+      color: #333;
+    }
+    
+    .item-details p {
+      margin: 0;
+      color: #666;
+    }
+    
+    .item-price {
+      font-weight: bold;
+      color: #2e7d32;
+      font-size: 1.1rem;
+      min-width: 80px;
+      text-align: right;
+    }
+    
+    .cart-summary {
+      background: #fff;
+      border-radius: 10px;
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+      padding: 20px;
+    }
+    
+    .subtotal {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 20px;
+      font-size: 1.2rem;
+      font-weight: bold;
+      padding-bottom: 15px;
+      border-bottom: 1px solid #eee;
+    }
+    
+    .total {
+      display: flex;
+      justify-content: space-between;
+      font-size: 1.5rem;
+      font-weight: bold;
+      color: #2e7d32;
+      margin-bottom: 20px;
+    }
+    
+    .btn {
+      background: #2e7d32;
+      color: #fff;
+      border: none;
+      padding: 15px;
+      width: 100%;
+      font-size: 18px;
+      border-radius: 10px;
+      cursor: pointer;
+      margin-top: 10px;
+      transition: all 0.3s ease;
+      text-decoration: none;
+      display: inline-block;
+      text-align: center;
+    }
+    
+    .btn:hover {
+      background: #388e3c;
+      transform: translateY(-2px);
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+    }
+    
+    .btn-secondary {
+      background: #6c757d;
+    }
+    
+    .btn-secondary:hover {
+      background: #5a6268;
+    }
+    
+    .actions {
+      display: flex;
+      gap: 10px;
+      margin-top: 20px;
+    }
+    
+    @media (max-width: 768px) {
+      .cart-item {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+      
+      .item-info {
+        width: 100%;
+        margin-bottom: 10px;
+      }
+      
+      .item-price {
+        align-self: flex-end;
+      }
+      
+      .actions {
+        flex-direction: column;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h2>Your Cart</h2>
+    
+    <div class="cart-container" id="cartItems">
+      <!-- Cart items will be dynamically inserted here -->
+    </div>
+
+    <div class="cart-summary">
+      <div class="subtotal">
+        <span>Subtotal:</span>
+        <span id="subtotalAmount">0.00</span>
+      </div>
+      
+      <div class="total">
+        <span>Total:</span>
+        <span id="totalAmount">0.00</span>
+      </div>
+      
+      <div class="actions">
+        <button class="btn btn-secondary" onclick="window.location.href='index.html'">Continue Shopping</button>
+        <button class="btn" onclick="window.location.href='address.html'">Proceed to Buy</button>
+      </div>
+    </div>
+    
+    <!-- Back to top button -->
+    <a href="#top" class="back-to-top">
+      <ion-icon name="chevron-up-outline"></ion-icon>
+    </a>
+  </div>
+  
+  <!-- Ionicons -->
+  <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
+  <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
+  
+  <script>
+    // Back to top button functionality
+    const backToTopButton = document.querySelector('.back-to-top');
+    
+    window.addEventListener('scroll', () => {
+      if (window.scrollY >= 100) {
+        backToTopButton.classList.add('active');
+      } else {
+        backToTopButton.classList.remove('active');
+      }
+    });
+    
+    backToTopButton.addEventListener('click', (e) => {
+      e.preventDefault();
+      window.scrollTo({
+        top: 0,
+        behavior: 'smooth'
+      });
+    });
+    
+    // Cart functionality
+    document.addEventListener('DOMContentLoaded', function() {
+      // Retrieve cart items from localStorage
+      loadCartItems();
+    });
+    
+    function loadCartItems() {
+      const cart = localStorage.getItem('cart');
+      const cartItems = cart ? JSON.parse(cart) : [];
+      
+      // Display cart items
+      displayCartItems(cartItems);
+      
+      // Calculate and display totals
+      updateCartTotals(cartItems);
+    }
+    
+    function displayCartItems(items) {
+      const cartContainer = document.getElementById('cartItems');
+      cartContainer.innerHTML = '';
+      
+      if (items.length === 0) {
+        cartContainer.innerHTML = '<p class="empty-cart-message">Your cart is empty. <a href="index.html">Continue shopping</a></p>';
+        return;
+      }
+      
+      items.forEach(item => {
+        const itemElement = document.createElement('div');
+        itemElement.className = 'cart-item';
+        itemElement.innerHTML = `
+          <div class="item-info">
+            <img src="${item.image}" alt="${item.name}">
+            <div class="item-details">
+              <h4>${item.name}</h4>
+              <p>$${item.price.toFixed(2)} × ${item.quantity}</p>
+            </div>
+          </div>
+          <div class="item-price">$${(item.price * item.quantity).toFixed(2)}</div>
+        `;
+        cartContainer.appendChild(itemElement);
+      });
+    }
+    
+    function updateCartTotals(items) {
+      const subtotal = items.reduce((sum, item) => sum + (item.price * item.quantity), 0);
+      const total = subtotal; // In a real app, you might add taxes, shipping, etc.
+      
+      document.getElementById('subtotalAmount').textContent = `$${subtotal.toFixed(2)}`;
+      document.getElementById('totalAmount').textContent = `$${total.toFixed(2)}`;
+    }
+    
+    // Add some CSS for the empty cart message
+    const style = document.createElement('style');
+    style.textContent = `
+      .empty-cart-message {
+        text-align: center;
+        padding: 40px 20px;
+        font-size: 18px;
+        color: #666;
+      }
+      
+      .empty-cart-message a {
+        color: #2e7d32;
+        text-decoration: none;
+        font-weight: bold;
+        margin-left: 5px;
+      }
+      
+      .empty-cart-message a:hover {
+        text-decoration: underline;
+      }
+    `;
+    document.head.appendChild(style);
+  </script>
+</body>
+</html>

@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Sign Up | GreenKart</title>
+
+  <link rel="shortcut icon" href="./favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="./assets/css/signup.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Roboto:wght@400;500&display=swap" rel="stylesheet">
+</head>
+
+<body>
+  <header class="header">
+    <a href="index.html" class="logo">Green<span class="span">Kart</span></a>
+  </header>
+
+  <main class="auth-container">
+    <div class="form-card">
+      <div class="toggle-buttons">
+        <button id="loginBtn" class="active">Login</button>
+        <button id="signupBtn">Sign Up</button>
+      </div>
+
+      <!-- LOGIN FORM -->
+      <form id="loginForm" class="auth-form active">
+        <h2 class="form-title">Welcome Back!</h2>
+        <p class="form-subtitle">Login to continue shopping 🌿</p>
+
+        <div class="input-group">
+          <input type="email" id="loginEmail" placeholder="Email" required>
+        </div>
+        <div class="input-group">
+          <input type="password" id="loginPassword" placeholder="Password" required>
+        </div>
+
+        <button type="submit" class="btn btn-primary">Login</button>
+        <p class="link-text">Don’t have an account? <a href="#" id="toSignup">Sign Up</a></p>
+      </form>
+
+      <!-- SIGN UP FORM -->
+      <form id="signupForm" class="auth-form">
+        <h2 class="form-title">Create Account</h2>
+        <p class="form-subtitle">Join our GreenKart family 💚</p>
+
+        <div class="input-group">
+          <input type="text" id="signupName" placeholder="Full Name" required>
+        </div>
+        <div class="input-group">
+          <input type="email" id="signupEmail" placeholder="Email" required>
+        </div>
+        <div class="input-group">
+          <input type="password" id="signupPassword" placeholder="Password" required>
+        </div>
+
+        <button type="submit" class="btn btn-primary">Sign Up</button>
+        <p class="link-text">Already have an account? <a href="#" id="toLogin">Login</a></p>
+      </form>
+    </div>
+  </main>
+
+  <script>
+    const loginBtn = document.getElementById('loginBtn');
+    const signupBtn = document.getElementById('signupBtn');
+    const loginForm = document.getElementById('loginForm');
+    const signupForm = document.getElementById('signupForm');
+    const toSignup = document.getElementById('toSignup');
+    const toLogin = document.getElementById('toLogin');
+
+    // Switch Forms
+    loginBtn.onclick = () => showForm('login');
+    signupBtn.onclick = () => showForm('signup');
+    toSignup.onclick = e => { e.preventDefault(); showForm('signup'); };
+    toLogin.onclick = e => { e.preventDefault(); showForm('login'); };
+
+    function showForm(type) {
+      if (type === 'login') {
+        loginForm.classList.add('active');
+        signupForm.classList.remove('active');
+        loginBtn.classList.add('active');
+        signupBtn.classList.remove('active');
+      } else {
+        signupForm.classList.add('active');
+        loginForm.classList.remove('active');
+        signupBtn.classList.add('active');
+        loginBtn.classList.remove('active');
+      }
+    }
+
+    // Sign Up
+    signupForm.addEventListener('submit', (e) => {
+      e.preventDefault();
+      const name = document.getElementById('signupName').value.trim();
+      const email = document.getElementById('signupEmail').value.trim();
+      const password = document.getElementById('signupPassword').value.trim();
+
+      if (localStorage.getItem(email)) {
+        alert('Account already exists! Please log in.');
+        showForm('login');
+        return;
+      }
+
+      const user = { name, email, password };
+      localStorage.setItem(email, JSON.stringify(user));
+      alert('Account created successfully! Please log in.');
+      signupForm.reset();
+      showForm('login');
+    });
+
+    // Login
+    loginForm.addEventListener('submit', (e) => {
+      e.preventDefault();
+      const email = document.getElementById('loginEmail').value.trim();
+      const password = document.getElementById('loginPassword').value.trim();
+
+      const storedUser = localStorage.getItem(email);
+      if (!storedUser) {
+        alert('No account found with this email.');
+        return;
+      }
+
+      const user = JSON.parse(storedUser);
+      if (user.password !== password) {
+        alert('Incorrect password.');
+        return;
+      }
+
+      localStorage.setItem('currentUser', email);
+      sessionStorage.setItem("justLoggedIn", "true");
+      window.location.href = "index.html";
+    });
+
+    // Auto redirect if logged in
+    const currentUserEmail = localStorage.getItem('currentUser');
+    if (currentUserEmail) {
+      window.location.href = "index.html";
+    }
+  </script>
+
+  <!-- Back to top button -->
+  <a href="#top" class="back-to-top">
+    <ion-icon name="chevron-up-outline"></ion-icon>
+  </a>
+
+  <script>
+    // Back to top button functionality
+    const backToTopButton = document.querySelector('.back-to-top');
+    
+    window.addEventListener('scroll', () => {
+      if (window.scrollY >= 100) {
+        backToTopButton.classList.add('active');
+      } else {
+        backToTopButton.classList.remove('active');
+      }
+    });
+    
+    backToTopButton.addEventListener('click', (e) => {
+      e.preventDefault();
+      window.scrollTo({
+        top: 0,
+        behavior: 'smooth'
+      });
+    });
+  </script>
+
+  <!-- Ionicons -->
+  <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
+  <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
+
+</body>
+</html>

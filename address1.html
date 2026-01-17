@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Address - GreenKart</title>
+  <style>
+    body { font-family: Arial, sans-serif; background: #fff; padding: 20px; }
+    h2 { color: #0a1a2a; }
+    form { display: flex; flex-direction: column; gap: 5px; }
+    input, textarea {
+      padding: 10px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      width: 100%;
+    }
+    .btn {
+      background: #00c060;
+      color: #fff;
+      border: none;
+      padding: 15px;
+      width: 100%;
+      font-size: 18px;
+      border-radius: 10px;
+      cursor: pointer;
+      margin-top: 10px;
+    }
+  </style>
+</head>
+<body>
+  <h2>Shipping Address</h2>
+  <form onsubmit="event.preventDefault(); window.location.href='payment.html';">
+    <input type="text" placeholder="Full Name" required>
+    <input type="text" placeholder="Phone Number" required>
+    <textarea placeholder="Full Address" required></textarea>
+    <input type="text" placeholder="City" required>
+    <input type="text" placeholder="Postal Code" required>
+    <button type="submit" class="btn">Proceed to Payment</button>
+  </form>
+</body>
+</html>

@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Payment - GreenKart</title>
+  <style>
+    body { font-family: Arial, sans-serif; background: #fff; padding: 20px; }
+    h2 { color: #0a1a2a; }
+    .payment-option { margin: 15px 0; }
+    label { font-size: 18px; }
+    .btn {
+      background: #00c060;
+      color: #fff;
+      border: none;
+      padding: 15px;
+      width: 100%;
+      font-size: 18px;
+      border-radius: 10px;
+      cursor: pointer;
+      margin-top: 20px;
+    }
+  </style>
+</head>
+<body>
+  <h2>Select Payment Method</h2>
+  <form onsubmit="event.preventDefault(); window.location.href='success.html';">
+    <div class="payment-option">
+      <input type="radio" name="payment" id="cod" required>
+      <label for="cod">Cash on Delivery</label>
+    </div>
+    <div class="payment-option">
+      <input type="radio" name="payment" id="card" required>
+      <label for="card">Credit/Debit Card</label>
+    </div>
+    <div class="payment-option">
+      <input type="radio" name="payment" id="upi" required>
+      <label for="upi">UPI / Net Banking</label>
+    </div>
+    <button type="submit" class="btn">Pay Now</button>
+  </form>
+</body>
+</html>

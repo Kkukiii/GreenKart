@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Wishlist - GreenKart</title>
+  <style>
+    body {
+      background-image: url('https://t3.ftcdn.net/jpg/02/48/92/96/360_F_248929619_JkVBYroM1rSrshWJemrcjriggudHMUhV.jpg');
+
+      font-family: Arial, sans-serif;
+      padding: 20px;
+      background-color: #f8f9fa;
+      color: #0a1a2a;
+    }
+
+    h2 {
+      text-align: center;
+      color: #0a1a2a;
+      margin-bottom: 30px;
+    }
+
+    .wishlist-container {
+      max-width: 700px;
+      margin: auto;
+      background: #fff;
+      padding: 25px;
+      border-radius: 10px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    }
+
+    .wishlist-item {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 20px;
+      padding-bottom: 15px;
+      border-bottom: 1px solid #eee;
+    }
+
+    .wishlist-item:last-child {
+      border-bottom: none;
+    }
+
+    .item-info {
+      display: flex;
+      align-items: center;
+      gap: 15px;
+    }
+
+    .wishlist-item img {
+      width: 80px;
+      height: 80px;
+      border-radius: 10px;
+      object-fit: cover;
+    }
+
+    .item-info h4 {
+      margin: 0;
+      font-size: 18px;
+    }
+
+    .item-info p {
+      margin: 3px 0 0;
+      color: #666;
+    }
+
+    .btn {
+      background: #00c060;
+      color: #fff;
+      border: none;
+      padding: 8px 16px;
+      border-radius: 6px;
+      cursor: pointer;
+      font-size: 15px;
+      margin-right: 8px;
+      transition: 0.3s;
+    }
+
+    .btn:hover {
+      background: #009e50;
+    }
+
+    .remove {
+      background: #dc3545;
+    }
+
+    .remove:hover {
+      background: #b02a37;
+    }
+
+    .empty-message {
+      text-align: center;
+      color: #777;
+      font-size: 18px;
+      margin-top: 40px;
+    }
+  </style>
+</head>
+<body>
+
+  <h2>Your Wishlist ❤️</h2>
+
+  <div class="wishlist-container" id="wishlistContainer">
+
+    <div class="wishlist-item">
+      <div class="item-info">
+        
+        <div>
+          <h4>Bright Side Vegetarian</h4>
+          <p>20.15</p>
+        </div>
+      </div>
+      <div>
+        <button class="btn" onclick="addToCart('Bright Side Vegetarian')">Add to Cart</button>
+        <button class="btn remove" onclick="removeItem(this)">✖ Remove</button>
+      </div>
+    </div>
+
+    <div class="wishlist-item">
+      <div class="item-info">
+        
+        <div>
+          <h4>Eco Vegetable</h4>
+          <p>13.25</p>
+        </div>
+      </div>
+      <div>
+        <button class="btn" onclick="addToCart('Eco Vegetable')">Add to Cart</button>
+        <button class="btn remove" onclick="removeItem(this)">✖ Remove</button>
+      </div>
+    </div>
+
+  </div>
+
+  <p class="empty-message" id="emptyMessage" style="display:none;">Your wishlist is empty 💔</p>
+
+  <script>
+    function addToCart(productName) {
+      alert(productName + " added to cart!");
+      window.location.href = "cart.html";
+    }
+
+    function removeItem(button) {
+      const item = button.closest(".wishlist-item");
+      item.remove();
+
+      // Check if wishlist empty
+      const container = document.getElementById("wishlistContainer");
+      if (container.children.length === 0) {
+        document.getElementById("emptyMessage").style.display = "block";
+      }
+    }
+  </script>
+</body>
+</html>

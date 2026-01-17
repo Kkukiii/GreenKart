@@ -1,0 +1,56 @@
+body {
+  font-family: 'Poppins', sans-serif;
+  background: #f7fdf8;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+.payment-container {
+  background: white;
+  padding: 30px 40px;
+  border-radius: 12px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+  width: 350px;
+  text-align: left;
+}
+
+h2 {
+  color: #062b1d;
+  margin-bottom: 15px;
+}
+
+.pay-btn {
+  background: #05c46b;
+  border: none;
+  color: white;
+  padding: 12px 20px;
+  width: 100%;
+  font-size: 16px;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.pay-btn:hover {
+  background: #04b360;
+}
+
+.success-message {
+  text-align: center;
+  padding: 20px;
+  animation: fadeIn 0.8s ease-in;
+}
+
+.tick-mark {
+  font-size: 70px;
+  color: #05c46b;
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(-20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
